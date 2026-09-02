@@ -9,3 +9,18 @@ jobs:
     steps:
       - name: "Github context"
         run: echo '${{ toJSON(github.event) }}'
+  comment-with-api:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Create comment with API"
+        run: 
+          gh api -X POST \
+            http://api.github.com/repo/${ORGANISATION}/${REPOSITORY}/issues/{$ISSUE_NUMBER}/comments \
+            -f body:' Comment but from API'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
+          ORGANISATION: ${{ github.event.organization.login}}
+          REPOSITORY: ${{ github.event.repository.name}}
+          ISSUE_NUMBER: ${{ 
+            
+      
