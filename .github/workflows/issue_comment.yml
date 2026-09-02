@@ -1,0 +1,11 @@
+name: Create a comment on a new isues
+on:
+  issues:
+    types:
+      opened
+jobs:
+  comment-with-action:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Github context"
+        run: echo '${{ toJSON(github.event) }}'
